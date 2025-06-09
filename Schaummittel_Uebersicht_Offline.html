@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Schaummittel Übersicht</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .table-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      vertical-align: top;
+    }
+    th {
+      background-color: #e0e0e0;
+      text-align: center;
+    }
+    td {
+      cursor: pointer;
+    }
+    td:hover {
+      background-color: #f1f9ff;
+    }
+    .tooltip {
+      display: none;
+      position: absolute;
+      background: #333;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 300px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Interaktive Übersicht: Schaummittel im Feuerwehrdienst</h1>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Schaummittel</th>
+        <th>Einsatzzweck</th>
+        <th>Vorteile</th>
+        <th>Nachteile</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-tooltip="Aqueous Film Forming Foam">AFFF</td>
+        <td data-tooltip="Besonders wirksam gegen Kohlenwasserstoffbrände">Flüssigkeitsbrände (z. B. Benzin, Diesel)</td>
+        <td data-tooltip="Schneller Löschangriff durch Film-Bildung">Sehr schnell wirksam, gute Fließfähigkeit</td>
+        <td data-tooltip="Enthält PFAS – umwelt- und gesundheitsschädlich">Enthält PFAS (gesundheits- & umweltschädlich)</td>
+      </tr>
+      <tr>
+        <td data-tooltip="Alcohol Resistant AFFF">AR-AFFF</td>
+        <td data-tooltip="Geeignet auch für polare Flüssigkeiten (z. B. Alkohol)">Flüssigkeiten inkl. polare Stoffe</td>
+        <td data-tooltip="Schützt auch gegen Durchmischung mit Alkohol">Auch für polare Flüssigkeiten geeignet</td>
+        <td data-tooltip="Teuer in Beschaffung, enthält PFAS">Enthält PFAS, teuer</td>
+      </tr>
+      <tr>
+        <td data-tooltip="Fluorfreier Schaum">FFF (fluorfrei)</td>
+        <td data-tooltip="Umweltfreundliche Alternative für diverse Brandklassen">Flüssigkeits- und Feststoffbrände</td>
+        <td data-tooltip="Kein PFAS, besser für Umwelt">Enthält kein PFAS, umweltfreundlich</td>
+        <td data-tooltip="Teilweise weniger wirksam bei Flüssigkeitsbränden">Geringere Beständigkeit, höhere Dosierung nötig</td>
+      </tr>
+      <tr>
+        <td data-tooltip="Schaummittel für Klasse-A-Brände">Class-A</td>
+        <td data-tooltip="Für Glutbrände wie Holz, Papier, Vegetation">Feststoffbrände (Holz, Papier, Vegetation)</td>
+        <td data-tooltip="Sehr effektiv bei Glutnester, biologisch abbaubar">Biologisch abbaubar, sehr gute Glutbekämpfung</td>
+        <td data-tooltip="Nicht für Flüssigkeitsbrände geeignet">Nicht für Flüssigkeitsbrände geeignet</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+  const tooltip = document.getElementById("tooltip");
+  document.querySelectorAll("td").forEach(td => {
+    td.addEventListener("mouseenter", e => {
+      const text = td.getAttribute("data-tooltip");
+      if (text) {
+        tooltip.innerText = text;
+        tooltip.style.display = "block";
+      }
+    });
+    td.addEventListener("mousemove", e => {
+      tooltip.style.left = e.pageX + 15 + "px";
+      tooltip.style.top = e.pageY + 15 + "px";
+    });
+    td.addEventListener("mouseleave", () => {
+      tooltip.style.display = "none";
+    });
+  });
+</script>
+
+</body>
+</html>
